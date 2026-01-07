@@ -13,7 +13,7 @@ public class DeliveryApp {
         boolean running = true;
         while (running) {
             showMenu();
-            int choice = Integer.parseInt(scanner.nextLine());
+            int choice = Integer.parseInt(scanner.nextLine().trim());
 
             switch (choice) {
                 case 1:
@@ -50,19 +50,19 @@ public class DeliveryApp {
         System.out.println("2 — Хрупкая");
         System.out.println("3 — Скоропортящаяся");
         
-        int type = Integer.parseInt(scanner.nextLine());
+        int type = Integer.parseInt(scanner.nextLine().trim());
         
         System.out.println("Введите описание посылки:");
         String description = scanner.nextLine();
         
         System.out.println("Введите вес посылки:");
-        int weight = Integer.parseInt(scanner.nextLine());
+        int weight = Integer.parseInt(scanner.nextLine().trim());
         
         System.out.println("Введите адрес доставки:");
         String deliveryAddress = scanner.nextLine();
         
         System.out.println("Введите день отправки:");
-        int sendDay = Integer.parseInt(scanner.nextLine());
+        int sendDay = Integer.parseInt(scanner.nextLine().trim());
         
         Parcel parcel = null;
         switch (type) {
@@ -73,7 +73,9 @@ public class DeliveryApp {
                 parcel = new FragileParcel(description, weight, deliveryAddress, sendDay);
                 break;
             case 3:
-                parcel = new PerishableParcel(description, weight, deliveryAddress, sendDay);
+                System.out.println("Введите срок годности (в днях):");
+                int expiryDays = Integer.parseInt(scanner.nextLine().trim());
+                parcel = new PerishableParcel(description, weight, deliveryAddress, sendDay, expiryDays);
                 break;
             default:
                 System.out.println("Неверный тип посылки.");

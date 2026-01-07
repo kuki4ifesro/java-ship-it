@@ -7,18 +7,13 @@ public class StandardParcel extends Parcel {
     }
     
     @Override
-    protected String getPackagePrefix() {
-        return null;
-    }
-    
-    @Override
     public void deliver() {
         System.out.println("Посылка <<" + description + ">> доставлена по адресу " + deliveryAddress);
     }
     
     @Override
-    public int calculateDeliveryCost() {
-        return 100 + weight * 10;
+    protected int getBaseCost() {
+        return 2;
     }
 }
 

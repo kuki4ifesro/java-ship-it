@@ -6,8 +6,6 @@ public abstract class Parcel {
     protected String deliveryAddress;
     protected int sendDay;
     
-    protected static final String PACKAGED_MESSAGE = " упакована";
-    
     public Parcel(String description, int weight, String deliveryAddress, int sendDay) {
         this.description = description;
         this.weight = weight;
@@ -16,18 +14,16 @@ public abstract class Parcel {
     }
     
     public void packageItem() {
-        String prefix = getPackagePrefix();
-        if (prefix != null && !prefix.isEmpty()) {
-            System.out.println(prefix);
-        }
-        System.out.println("Посылка <<" + description + ">>" + PACKAGED_MESSAGE);
+        System.out.println("Посылка <<" + description + ">> упакована");
     }
-    
-    protected abstract String getPackagePrefix();
     
     public abstract void deliver();
     
-    public abstract int calculateDeliveryCost();
+    public int calculateDeliveryCost() {
+        return weight * getBaseCost();
+    }
+    
+    protected abstract int getBaseCost();
     
     public String getDescription() {
         return description;

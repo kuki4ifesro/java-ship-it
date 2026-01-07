@@ -1,15 +1,11 @@
 package ru.yandex.practicum.delivery;
 
 public class PerishableParcel extends Parcel {
-    private static final int EXPIRY_DAYS = 3;
+    private int expiryDays;
     
-    public PerishableParcel(String description, int weight, String deliveryAddress, int sendDay) {
+    public PerishableParcel(String description, int weight, String deliveryAddress, int sendDay, int expiryDays) {
         super(description, weight, deliveryAddress, sendDay);
-    }
-    
-    @Override
-    protected String getPackagePrefix() {
-        return null;
+        this.expiryDays = expiryDays;
     }
     
     @Override
@@ -18,12 +14,12 @@ public class PerishableParcel extends Parcel {
     }
     
     @Override
-    public int calculateDeliveryCost() {
-        return 150 + weight * 12;
+    protected int getBaseCost() {
+        return 3;
     }
     
     public boolean isExpired(int currentDay) {
-        return (currentDay - sendDay) > EXPIRY_DAYS;
+        return (currentDay - sendDay) > expiryDays;
     }
 }
 

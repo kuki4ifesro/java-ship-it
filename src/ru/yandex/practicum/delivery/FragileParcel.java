@@ -7,8 +7,9 @@ public class FragileParcel extends Parcel implements Trackable {
     }
     
     @Override
-    protected String getPackagePrefix() {
-        return "Посылка <<" + description + ">> обёрнута в защитную плёнку";
+    public void packageItem() {
+        System.out.println("Посылка <<" + description + ">> обёрнута в защитную плёнку");
+        super.packageItem();
     }
     
     @Override
@@ -17,8 +18,8 @@ public class FragileParcel extends Parcel implements Trackable {
     }
     
     @Override
-    public int calculateDeliveryCost() {
-        return 200 + weight * 15;
+    protected int getBaseCost() {
+        return 4;
     }
     
     @Override
